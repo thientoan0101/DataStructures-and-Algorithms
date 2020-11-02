@@ -23,7 +23,7 @@ void shellSort(int a[], int n)
 {
     for (int h = n / 2; h > 0; h = h / 2)
     {
-        for (int i = h; i < n; i = i + h)
+        for (int i = h; i < n; i = i++)
         {
             int x = a[i];
             int pos = i - h;
@@ -41,14 +41,14 @@ void shellSort(int a[], int n)
 
 int main()
 {
-    int a[] = {35,33,42,10,14,19,27,44};
-    for (int i = 0; i < 8; i++)
+    int a[] = {35,33,42,10,14,19,27,44,35,33,42,10,14,19,27,44 };
+    for (int i = 0; i < 16; i++)
         cout << a[i] << "  ";
     cout << endl;
 
 
-    shellSort(a, 8);
+    shellSort(a, 16);
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 16; i++)
         cout << a[i] << "  ";
 }
