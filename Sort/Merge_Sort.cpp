@@ -26,51 +26,58 @@ void print(int a[], int n)
     cout << endl;
 }
 
-void merge(int a[], int l, int mid, int r, int temp[])
+
+
+void merge(int a[], int l, int m, int r)
 {
-    int ileft = l, iRight = mid+1;              // bien chay cho 2 mang con
-    for (int j = l; j <= r; j++)             // bien chay cho temp[]
-    {
-        if (ileft <= mid && (iRight > r || a[ileft] < a[iRight]))
-        {
-            temp[j] = a[ileft];
-            ileft++;
-        }
-        else {
-            temp[j] = a[iRight];
-            iRight++;
-        }
-    }
+	int n1 = m - l + 1;
+	int n2 = r - m;
+	int* L = new int[n1];
+	int* R = new int[n2];
+
+	for (int i = 0; i < n1; i++)
+		L[i] = a[l + i];
+	for (int i = 0; i < n2; i++)
+		R[i] = a[m + 1 + i];
+	int i = 0, j = 0;
+
+	for (int k = l; k <= r; k++)             
+	{
+		if (i < n1 && (j >= n2 || L[i] < R[j]))
+		{
+			a[k] = L[i];
+			i++;
+		}
+		else {
+			a[k] = R[j];
+			j++;
+		}
+	}
+	delete[] L;
+	delete[] R;
 }
 
-void copyArr(int temp[], int l, int r, int a[])
+void MergeSort(int a[], int l, int r)
 {
-    for (int i = l; i <= r; i++)
-    {
-        a[i] = temp[i];
-    }
+	if (l >= r)  return;
+	int mid = l + (r - l) / 2;
+	MergeSort(a, l, mid);
+	MergeSort(a, mid + 1, r);
+	merge(a, l, mid, r);
 }
-void mergeSort(int a[], int l, int r, int temp[])
-{
-    if (l>=r)  return;
-    int mid = (l + r) / 2;
-    mergeSort(a, l, mid, temp);
-    mergeSort(a, mid+1, r, temp);
-    merge(a, l, mid, r, temp);
-    copyArr(temp, l, r, a);
-}
+
 
 
 int main()
 {
     int a[] = { 7,3,9,10,1,5,2,4,8 };
-    int temp[9];
+    
     for (int i = 0; i < 9; i++)
         cout << a[i] << "  ";
     cout << endl;
 
 
-    mergeSort(a, 0, 8, temp);
+    mergeSort(a, 0, 8);
 
     for (int i = 0; i < 9; i++)
         cout << a[i] << "  ";

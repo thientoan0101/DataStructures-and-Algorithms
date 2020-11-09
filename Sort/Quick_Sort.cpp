@@ -27,7 +27,7 @@ void print(int a[], int n)
 void quickSort(int a[], int left, int right)
 {
     int i = left, j = right;
-    int pivot = a[right];
+    int pivot = (a[right]+ a[left])/2;
 
     while (i <= j)
     {

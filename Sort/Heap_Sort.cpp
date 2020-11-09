@@ -13,25 +13,6 @@
 #include <algorithm>
 using namespace std;
 
-
-void heapify(int a[], int parentIndex, int lastIndex)
-{
-    int left = parentIndex * 2 + 1;                             // left child
-    int right = parentIndex * 2 + 2;
-    int largest = parentIndex;
-    
-    if (left < lastIndex && a[left] > a[largest])
-        largest = left;
-    if (right < lastIndex && a[right] > a[largest])
-        largest = right;
-    if (largest != parentIndex)
-    {
-        swap(a[largest], a[parentIndex]);
-        heapify(a, largest, lastIndex);
-    }
-
-}
-
 void print(int a[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -41,18 +22,36 @@ void print(int a[], int n)
     cout << endl;
 }
 
-void heapSort(int a[], int n)
+void heapify(int a[], int parentIndex, int lastIndex)
 {
-    for (int i = n/2 - 1; i >= 0; i--)
-    {
-        heapify(a, i, n - 1);
-    }
+	int left = parentIndex * 2 + 1;
+	int right = parentIndex * 2 + 2;
+	int biggest = parentIndex;
 
-    for (int i = n - 1; i > 0; i--)
-    {
-        swap(a[0], a[i]);
-        heapify(a, 0, i);
-    }
+	if (left < lastIndex && a[left] > a[biggest])
+		biggest = left;
+	if (right < lastIndex && a[right] > a[biggest])
+		biggest = right;
+	if (biggest != parentIndex)
+	{
+		swap(a[biggest], a[parentIndex]);
+		heapify(a, biggest, lastIndex);
+	}
+
+}
+
+void HeapSort(int a[], int n)
+{
+	for (int i = n / 2 - 1; i >= 0; i--)
+	{
+		heapify(a, i, n - 1);
+	}
+
+	for (int i = n - 1; i > 0; i--)
+	{
+		swap(a[0], a[i]);
+		heapify(a, 0, i);
+	}
 }
 
 
