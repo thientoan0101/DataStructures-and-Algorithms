@@ -73,7 +73,7 @@ void merge(vector<Student> &stu, int left, int mid, int right)
 	Student* list2 = new Student[n2];
 
 	int k = 0, l = 0;
-		for (int i = left; i <= mid; i++)
+	for (int i = left; i <= mid; i++)
 		list1[k++] = stu[i];
 	for (int j = mid + 1; j <= right; j++)
 		list2[l++] = stu[j];
